@@ -1,0 +1,62 @@
+package com.twilio;
+import java.net.URI;
+
+import java.net.http.HttpClient;
+
+import java.net.http.HttpRequest;
+
+import java.net.http.HttpResponse;
+
+
+
+public class sample {
+
+   
+
+    public static void main(String args[]){
+
+           
+
+    
+        String msg= "To=+919390395392&Body=Hello Likhitha&MediaUrl=https://demo.twilio.com/owl.png&From=+19255152293";
+        
+
+
+
+            try {
+
+                HttpRequest request = HttpRequest.newBuilder()
+                		
+                	.uri(new URI("https://api.twilio.com/2010-04-01/Accounts/AC9e912ae70a8263e6361bb87388cc5bec/Messages.json"))
+
+                    .header("Authorization", "Basic QUM5ZTkxMmFlNzBhODI2M2U2MzYxYmI4NzM4OGNjNWJlYzo2MDMzNWFmN2FjZjIxMGE5ZmM2MjA0M2RmODk4ZjA1NA==")
+
+                    .header("Content-Type","application/x-www-form-urlencoded")
+
+                    .POST(HttpRequest.BodyPublishers.ofString(msg))
+
+                    .build();
+
+                HttpClient http = HttpClient.newHttpClient();
+
+                HttpResponse<String> response = http.send(request,HttpResponse.BodyHandlers.ofString());
+
+                System.out.println(response.body());
+
+            } catch (Exception e) {
+
+                System.out.println("exception ");
+
+                e.printStackTrace();
+
+            }
+
+       
+
+       
+
+    }
+
+
+
+}
